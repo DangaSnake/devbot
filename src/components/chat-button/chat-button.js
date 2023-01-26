@@ -270,7 +270,7 @@ const ChatButton = (props) => {
                         if (!message.text) {
                             return (
                                 <div key={idx} className="bot-message">
-                                    <img src={`/bot-icon-${props.myKey}.png`} alt="bot-pfp-icon" className="message-image"></img>
+                                    <img src={`bot-icon-${props.myKey}.png`} alt="bot-pfp-icon" className="message-image"></img>
                                     <span className={`message-text bot-message-text bot-${props.myKey}-message`}>
                                         <div className="load-animation-holder">
                                             <div className="load-dot load-dot-1" />
@@ -284,13 +284,13 @@ const ChatButton = (props) => {
                             /* otherwise checks the ".sender" prop and renders each element based on that */
                             return (
                                 <div key={idx} className="bot-message">
-                                    <img src={`/bot-icon-${props.myKey}.png`} alt="bot-pfp-icon" className="message-image"></img>
+                                    <img src={`bot-icon-${props.myKey}.png`} alt="bot-pfp-icon" className="message-image"></img>
                                     <span className={`message-text bot-message-text bot-${props.myKey}-message`}>{message.text}</span>
                                 </div>)
                         } else {
                             return (
                                 <div key={idx} className="user-message">
-                                    <img src="/user-icon.png" alt="bot-pfp-icon" className="message-image"></img>
+                                    <img src="user-icon.png" alt="bot-pfp-icon" className="message-image"></img>
                                     <span className="message-text user-message-text">{message.text}</span>
                                 </div>)
                         }
@@ -299,7 +299,7 @@ const ChatButton = (props) => {
                 <div className="warning-message"><span className="warning-text">Sending messages too fast! Slow down</span></div>
                 <form className="input-bar" onSubmit={handleMessageSend}>
                     <input className="input-element" onChange={handleChange} value={inputValue} type="text" placeholder="Enter your text here..."></input>
-                    <button type="submit" className="arrow-button"><img src="/arrow-icon.png" alt="send-arrow-icon" className="arrow-icon" /></button>
+                    <button type="submit" className="arrow-button"><img src="arrow-icon.png" alt="send-arrow-icon" className="arrow-icon" /></button>
                 </form>
 
             </div>}

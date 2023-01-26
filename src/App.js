@@ -20,7 +20,7 @@ function App() {
         <span className="title-text">To</span>
         <SlotText />
       </div>
-      <img alt="Arrow Doodle" src="/arrow-doodle.png" className="arrow-doodle" id="arrow-doodle" />
+      <img alt="Arrow Doodle" src="arrow-doodle.png" className="arrow-doodle" id="arrow-doodle" />
       <div className="chat-bar">
         <div className="chat-button-div">
           <ChatButton key="0" name="DevBot" myKey="0" />
