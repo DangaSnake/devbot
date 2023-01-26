@@ -1,6 +1,5 @@
 import "./chat-button.css";
 import { useEffect, useState } from "react";
-import _ from 'lodash';
 
 /*Keywords for various bots, based on the "myKey" prop, lined up with the index of the array of reponses for said bot */
 const acceptableKeywords = [
@@ -20,7 +19,6 @@ const acceptableKeywords = [
 const ChatButton = (props) => {
     const [chatOpen, setChatOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const [userSentMessage, setUserSentMessage] = useState("");
     const [messageSendTimeout, setMessageSendTimeout] = useState(0);
     const [messageArray, setMessageArray] = useState([
         {
@@ -29,29 +27,33 @@ const ChatButton = (props) => {
         },
     ]);
     
-
+    /*This useEffect handles scrolling the messageList and highlighting keywords in each botResponse. Executes when the dependencies
+    update, "props.myKey" was added to avoid a warning*/
     useEffect(() => {
         let chatBox = document.getElementsByClassName("chatbot-box")[parseInt(props.myKey)];
         const botResponseArray = chatBox.querySelectorAll(".bot-message-text");
-        const botResponse = botResponseArray[botResponseArray.length - 1];
         const messageList = chatBox.querySelector(".message-list");
+
         if (messageList) {
             messageList.scrollTop = messageList.scrollHeight;
         }
-        if (botResponse) {
-            acceptableKeywords[props.myKey].forEach((word) => {
-                botResponse.innerHTML = botResponse.innerHTML.replace(new RegExp(`${word}`, 'g'), `<span class="highlighted">${word}</span>`);
-            })
 
-        };
-    }, [messageArray, chatOpen])
+        /*Goes through each bot response and highlights keywords */
+        botResponseArray.forEach((botResponse) => {
+            if (botResponse) {
+                acceptableKeywords[props.myKey].forEach((word) => {
+                    botResponse.innerHTML = botResponse.innerHTML.replace(new RegExp(`${word}`, 'g'), `<span class="highlighted">${word}</span>`);
+                })
+            };
+        })
+    }, [messageArray, chatOpen, props.myKey])
 
     const handleClick = (event) => {
         let chatBox = document.getElementsByClassName("chatbot-box")[parseInt(props.myKey)];
         let onlineDot = chatBox.querySelector("#online-dot");
         let dotRipple = document.getElementsByClassName("dot-ripple")[parseInt(props.myKey)];
         /*Here we are closing the box when we click the label, soon we will add a box/X to close it */
-        if (chatOpen && event.target.id === `chat-label-${props.myKey}`) {
+        if (chatOpen && (event.target.id === `chat-label-${props.myKey}` || event.target.id === `chat-label-span-${props.myKey}`)) {
             /*Chat closing*/
             setChatOpen(false);
             chatBox.classList.remove("chatbox-grow-animation");
@@ -66,7 +68,7 @@ const ChatButton = (props) => {
                 dotRipple.style.visibility = "unset";
                 dotRipple.style.animationName = "ripple";
 
-            }, 2700);
+            }, 1300);
 
 
         } else {
@@ -97,8 +99,7 @@ const ChatButton = (props) => {
         }
 
         /*Starts by checking that the messSendTimeout is not active. */
-        if (messageSendTimeout == 0) {
-            setUserSentMessage(inputValue);
+        if (messageSendTimeout === 0) {
             setMessageArray([...messageArray, {
                 sender: "user",
                 text: inputValue
@@ -136,11 +137,13 @@ const ChatButton = (props) => {
             if (regex.test(userInput)) {
                 keywordMatch = word;
                 return true;
+            } else {
+                return false;
             }
         });
 
         /*RESPONSES, seperated by key and bot type*/
-        if (props.myKey == "0") {
+        if (props.myKey === "0") {
             /*Keywords for DEVBOT */
             switch (keywordMatch) {
                 case "help":
@@ -164,7 +167,7 @@ const ChatButton = (props) => {
                 default:
                     botText = "Hmmm I'm sorry, I don't have a response for that. Try typing keywords for a list of available options.";
             }
-        } else if (props.myKey == "1") {
+        } else if (props.myKey === "1") {
             /*Keywords for BIZBOT */
             switch (keywordMatch) {
                 case "help":
@@ -258,7 +261,7 @@ const ChatButton = (props) => {
             <label className="chatbot-label" id={`chat-label-${props.myKey}`}>
                 <div className="online-dot" id="online-dot" />
                 <div className="online-dot dot-ripple" id="dot-ripple" />
-                <span>{`${props.name}`}</span>
+                <span id={`chat-label-span-${props.myKey}`}>{`${props.name}`}</span>
             </label>
             {chatOpen && <div className="inner-chatbox">
                 <div className="message-list" id="message-list">

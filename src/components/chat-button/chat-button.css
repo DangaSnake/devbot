@@ -46,19 +46,19 @@
     width: 6px;
     height: 6px;
     position: relative;
-    top: 52%;
+    top: 65%;
     left: 13%;
     border-radius: 100%;
     opacity: 1;
     z-index: 1;
-    transition: opacity 2s ease-in-out .5s;
+    transition: opacity 1.5s ease-in-out .5s;
     
 }
 
 .dot-ripple {
     width: 5px;
     height: 5px;
-    top: 38%;
+    top: 47%;
     left: 13.4%;
     position: relative;
     background-color: #42fa9e87;
@@ -288,4 +288,10 @@
 
 .arrow-button {
     transition: opacity 1.5s ease-in-out;
+}
+
+.chatbot-label {
+    height: 30px;
+    width: 100%;
+    display: inline-block;
 }
