@@ -1,38 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
 .App {
   text-align: center;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.title-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  height: 77vh;
+  margin-left: 40px;
+}
+
+.title-text {
+  font-size: 15vh;
   color: white;
+  text-align: left;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  opacity: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.title-text:nth-child(1) {
+  animation: fade-in 1s forwards .33s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.title-text:nth-child(2) {
+  animation: fade-in 1s forwards 1s;
+}
+
+.title-text:nth-child(3) {
+  animation: fade-in 1s forwards 1.5s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  100% {
+    opacity: 1;
   }
+}
+
+.arrow-doodle {
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  bottom: 110px;
+  right: 500px;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  transform: scaleX(-1) rotate(-45deg);
+}
+
+
+@keyframes arrow-bounce {
+  0% {
+    transform: scaleX(-1) rotate(-45deg) translateY(0) translateX(0px);
+  }
+
+  50% {
+    transform: scaleX(-1) rotate(-45deg) translateY(-10px) translateX(15px);
+  }
+
+  100% {
+    transform: scaleX(-1) rotate(-45deg) translateY(0) translateX(0px);
+  } 
+}
+
+.chat-bar {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  justify-content: space-around;
+  bottom: 0;
+  width: 450px;
+  right: 1550px;
+  height: 200px;
+  animation: chat-bar-move-in 1.8s ease-in-out 1s forwards;
+}
+
+@keyframes chat-bar-move-in {
+  0% {
+    right: 1550px;
+  }
+
+  45% {
+    right: 140px
+  }
+
+  60% {
+    right: 240px
+  }
+
+  75% {
+    right: 150px
+  }
+
+  80% {
+    right: 165px
+  }
+
+  90% {
+    right: 150px
+  }
+
+  95% {
+    right: 155px;
+  }
+  
+  100% {
+    right: 150px;
+  }
+}
+
+.chat-button-div {
+  height: 200px;
+  width: auto;
+  position: relative;
+  flex: 1;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
 }
