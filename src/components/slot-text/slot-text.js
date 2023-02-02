@@ -32,8 +32,7 @@ const SlotText = () => {
             {wordList.map((word, idx) => {
                 return(
                     <span key={idx} className="main-text">{word}</span>
-                );
-                
+                );       
             })}
         </div> 
     );
