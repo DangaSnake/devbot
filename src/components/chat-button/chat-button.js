@@ -296,6 +296,7 @@ const ChatButton = (props) => {
                         }
                     })}
                 </div>
+                {/* Appears when user sends message before bot response is received */}
                 <div className="warning-message"><span className="warning-text">Sending messages too fast! Slow down</span></div>
                 <form className="input-bar" onSubmit={handleMessageSend}>
                     <input className="input-element" onChange={handleChange} value={inputValue} type="text" placeholder="Enter your text here..."></input>
